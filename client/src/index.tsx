@@ -1,8 +1,14 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import DataComponent from "./components/DataComponent";
 
 function App({ message }: { message: string }) {
-  return <h1>{message}</h1>;
+  return (
+    <>
+      <h1>{message}</h1>
+      <DataComponent />
+    </>
+  );
 }
 
 window.addEventListener("DOMContentLoaded", () => {
