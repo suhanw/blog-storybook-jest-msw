@@ -38,6 +38,7 @@
     "@types/jest": "29.5.13",
     "@types/react": "18.2.79",
     "@types/react-dom": "18.2.25",
+    "axios": "1.7.7",
     "concurrently": "8.2.2",
     "esbuild": "0.20.2",
     "esbuild-plugin-tsc": "0.4.0",
