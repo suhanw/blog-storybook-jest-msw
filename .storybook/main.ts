@@ -17,5 +17,8 @@ const config: StorybookConfig = {
     name: "@storybook/react-vite",
     options: {},
   },
+  // Enable Storybook to fetch MSW script
+  // https://github.com/storybookjs/storybook/issues/17907
+  staticDirs: ["../client/src/mocks"],
 };
 export default config;
