@@ -105,7 +105,12 @@ const config: Config = {
   // preset: undefined,
 
   // Run tests from one or more projects
-  // projects: undefined,
+
+  // With the projects option enabled, Jest will copy the root-level configuration options to each
+  // individual child configuration during the test run, resolving its values in the child's context.
+  // This means that string tokens like <rootDir> will point to the child's root directory even if
+  // they are defined in the root-level configuration.
+  projects: ["<rootDir>/client/jest.config.ts"],
 
   // Use this configuration option to add custom reporters to Jest
   // reporters: undefined,
@@ -137,7 +142,7 @@ const config: Config = {
   // setupFiles: [],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
+  // setupFilesAfterEnv: [],
 
   // The number of seconds after which a test is considered as slow and reported as such in the results.
   // slowTestThreshold: 5,
@@ -146,7 +151,7 @@ const config: Config = {
   // snapshotSerializers: [],
 
   // The test environment that will be used for testing
-  testEnvironment: "jsdom",
+  // testEnvironment: undefined,
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
@@ -175,14 +180,7 @@ const config: Config = {
   // testRunner: "jest-circus/runner",
 
   // A map from regular expressions to paths to transformers
-  transform: {
-    "^.+\\.(ts|tsx)?$": [
-      "ts-jest",
-      {
-        tsconfig: "<rootDir>/client/tsconfig.json",
-      },
-    ],
-  },
+  // transform: undefined,
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   // transformIgnorePatterns: [
