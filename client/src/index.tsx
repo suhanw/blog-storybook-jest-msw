@@ -1,6 +1,9 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import { enableMocking } from "./mocks/browser";
 import DataComponent from "./components/DataComponent";
+
+const isDev = !process.env.NODE_ENV || process.env.NODE_ENV === "development";
 
 function App({ message }: { message: string }) {
   return (
@@ -11,7 +14,11 @@ function App({ message }: { message: string }) {
   );
 }
 
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", async () => {
+  if (isDev) {
+    await enableMocking();
+  }
+
   const root = createRoot(document.getElementById("root"));
   root.render(<App message="Hello World!!" />);
 });
