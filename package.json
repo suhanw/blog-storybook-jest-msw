@@ -13,7 +13,8 @@
     "typecheck:server": "tsc --noEmit --project server/tsconfig.json",
     "typecheck": "concurrently --raw \"npm:typecheck:client\" \"npm:typecheck:server\"",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "test": "jest"
   },
   "author": "suhanw@gmail.com",
   "license": "ISC",
@@ -33,6 +34,7 @@
     "@testing-library/dom": "10.4.0",
     "@testing-library/react": "16.0.1",
     "@types/express": "4.17.21",
+    "@types/jest": "29.5.13",
     "@types/react": "18.2.79",
     "@types/react-dom": "18.2.25",
     "concurrently": "8.2.2",
