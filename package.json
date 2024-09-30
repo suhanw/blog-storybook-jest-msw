@@ -54,5 +54,10 @@
   },
   "volta": {
     "node": "20.12.2"
+  },
+  "msw": {
+    "workerDirectory": [
+      "client/src/mocks"
+    ]
   }
 }

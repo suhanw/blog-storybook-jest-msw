@@ -4,6 +4,17 @@ import express from "express";
 const PORT = 3000;
 const app = express();
 
+const isDev = !process.env.NODE_ENV || process.env.NODE_ENV === "development";
+
+if (isDev) {
+  app.use(
+    "/mockServiceWorker.js",
+    express.static(
+      path.join(process.cwd(), "./client/src/mocks/mockServiceWorker.js")
+    )
+  );
+}
+
 app.use("/public", express.static(path.join(process.cwd(), "./dist/client")));
 
 app.get("/", (req, res) => {
