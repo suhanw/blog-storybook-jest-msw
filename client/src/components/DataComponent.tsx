@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer } from "react";
-import axios from "axios";
+import { getUser } from "../api/get-user";
 
 interface State {
   error?: string | null;
@@ -39,9 +39,8 @@ function DataComponent() {
   const [{ error, quote }, dispatch] = useReducer(quoteReducer, initialState);
 
   useEffect(() => {
-    axios
-      .get("/user")
-      .then(({ data }) => {
+    getUser()
+      .then((data) => {
         dispatch({
           type: "SUCCESS",
           quote: `"Yeah." -${data.firstName} ${data.lastName}`,
