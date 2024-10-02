@@ -1,10 +1,11 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import DataComponent from "./DataComponent";
 import { server } from "../mocks/server";
-import { getUserMockHandler } from "../api/get-user-mock";
+import { getUserMockHandler, mockResponseData } from "../api/get-user-mock";
 
 beforeAll(() => {
+  server.use(getUserMockHandler);
   server.listen();
 });
 
@@ -19,15 +20,19 @@ afterAll(() => {
 });
 
 describe("DataComponent", () => {
-  it("should fetch tasks", async () => {
-    server.use(getUserMockHandler);
+  it("should display user data", async () => {
+    const { firstName, lastName } = mockResponseData;
 
     render(<DataComponent />);
-
-    expect(screen.getByText("This is DataComponent.")).toBeInTheDocument();
+    expect(screen.queryByText("This is DataComponent.")).toBeInTheDocument();
+    expect(screen.queryByText("LOADING")).toBeInTheDocument();
 
     // wait until the `get` request promise resolves
-    await screen.findByText('"Yeah." -John Wick');
-    expect(screen.getByText('"Yeah." -John Wick')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.queryByText("LOADING")).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(`"Yeah." -${firstName} ${lastName}`)
+      ).toBeInTheDocument();
+    });
   });
 });
