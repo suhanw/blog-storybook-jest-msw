@@ -1,14 +1,16 @@
 import React, { useEffect, useReducer } from "react";
 import { getUser } from "../api/get-user";
 
-interface State {
+type State = {
   error?: string | null;
   quote?: string | null;
-}
+};
 
-interface Action extends State {
+type Action = {
   type: string;
-}
+  error?: string | null;
+  quote?: string | null;
+};
 
 const initialState: State = {
   error: null,
