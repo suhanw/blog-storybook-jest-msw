@@ -1,12 +1,12 @@
 import axios from "axios";
 
-const API_ROUTE = "/user";
+export const API_ROUTE = "/user";
 
-interface ResponseData {
+export type ResponseData = {
   id: string;
   firstName: string;
   lastName: string;
-}
+};
 
 export async function getUser(): Promise<ResponseData> {
   try {
