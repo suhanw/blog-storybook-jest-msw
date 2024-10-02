@@ -1,5 +1,7 @@
 import { setupWorker } from "msw/browser";
-import { handlers } from "./handlers";
+import { getUserMockHandler } from "../api/get-user-mock";
+
+const handlers = [getUserMockHandler];
 
 const worker = setupWorker(...handlers);
 

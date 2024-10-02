@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import DataComponent from "./DataComponent";
-import { handlers } from "../mocks/handlers";
+import { getUserMockHandler } from "../api/get-user-mock";
 
 const meta: Meta<typeof DataComponent> = {
   title: "DataComponent",
@@ -15,7 +15,7 @@ type Story = StoryObj<typeof DataComponent>;
 export const Success: Story = {
   parameters: {
     msw: {
-      handlers,
+      handlers: [getUserMockHandler],
     },
   },
 };

@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import DataComponent from "./DataComponent";
 import { server } from "../mocks/server";
-import { handlers } from "../mocks/handlers";
+import { getUserMockHandler } from "../api/get-user-mock";
 
 beforeAll(() => {
   server.listen();
@@ -20,7 +20,7 @@ afterAll(() => {
 
 describe("DataComponent", () => {
   it("should fetch tasks", async () => {
-    server.use(...handlers);
+    server.use(getUserMockHandler);
 
     render(<DataComponent />);
 
