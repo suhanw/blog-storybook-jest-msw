@@ -1,67 +1,17 @@
-import React, { useEffect, useReducer } from "react";
-import { getUser } from "../api/get-user";
-
-type State = {
-  error?: string | null;
-  quote?: string | null;
-};
-
-type Action = {
-  type: string;
-  error?: string | null;
-  quote?: string | null;
-};
-
-const initialState: State = {
-  error: null,
-  quote: null,
-};
-
-function quoteReducer(state: State, action: Action): State {
-  switch (action.type) {
-    case "SUCCESS": {
-      return {
-        error: null,
-        quote: action.quote,
-      };
-    }
-    case "ERROR": {
-      return {
-        error: action.error,
-        quote: null,
-      };
-    }
-    default: {
-      return state;
-    }
-  }
-}
+import React from "react";
+import { useGetUser } from "../api/get-user";
 
 function DataComponent() {
-  const [{ error, quote }, dispatch] = useReducer(quoteReducer, initialState);
-
-  useEffect(() => {
-    getUser()
-      .then((data) => {
-        dispatch({
-          type: "SUCCESS",
-          quote: `"Yeah." -${data.firstName} ${data.lastName}`,
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-        dispatch({
-          type: "ERROR",
-          error: "Uh oh. Something went wrong.",
-        });
-      });
-  }, []);
+  const { loading, error, firstName, lastName } = useGetUser();
 
   return (
     <div>
       <p>This is DataComponent.</p>
-      {quote && <p>{quote}</p>}
-      {error && <p>{error}</p>}
+      {loading && <p>LOADING</p>}
+      {!loading && error && <p role="alert">{error}</p>}
+      {!loading && firstName && lastName && (
+        <p>{`"Yeah." -${firstName} ${lastName}`}</p>
+      )}
     </div>
   );
 }
