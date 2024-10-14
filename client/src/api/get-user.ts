@@ -33,8 +33,13 @@ type Action = {
   lastName?: string | null;
 };
 
-function reducer(state: State, action: Action): State {
+function getUserReducer(state: State, action: Action): State {
   switch (action.type) {
+    case "LOADING": {
+      return {
+        loading: true,
+      };
+    }
     case "SUCCESS": {
       return {
         loading: false,
@@ -61,7 +66,7 @@ const initialState: State = {
 
 export function useGetUser() {
   const [{ loading, error, firstName, lastName }, dispatch] = useReducer(
-    reducer,
+    getUserReducer,
     initialState
   );
 
