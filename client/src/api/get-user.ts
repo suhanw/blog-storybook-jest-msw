@@ -64,11 +64,8 @@ const initialState: State = {
   loading: true,
 };
 
-export function useGetUser() {
-  const [{ loading, error, firstName, lastName }, dispatch] = useReducer(
-    getUserReducer,
-    initialState
-  );
+export function useGetUser(): State {
+  const [userState, dispatch] = useReducer(getUserReducer, initialState);
 
   useEffect(() => {
     getUser()
@@ -86,10 +83,5 @@ export function useGetUser() {
       });
   }, []);
 
-  return {
-    loading,
-    error,
-    firstName,
-    lastName,
-  };
+  return userState;
 }
