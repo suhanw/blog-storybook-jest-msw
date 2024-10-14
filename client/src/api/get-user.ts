@@ -9,6 +9,16 @@ export type ResponseData = {
   lastName: string;
 };
 
+async function getUser(): Promise<ResponseData> {
+  try {
+    const { data } = await axios.get(API_ROUTE);
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
 type State = {
   loading: boolean;
   error?: string | null;
@@ -22,16 +32,6 @@ type Action = {
   firstName?: string | null;
   lastName?: string | null;
 };
-
-async function getUser(): Promise<ResponseData> {
-  try {
-    const { data } = await axios.get(API_ROUTE);
-    return data;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-}
 
 function reducer(state: State, action: Action): State {
   switch (action.type) {
